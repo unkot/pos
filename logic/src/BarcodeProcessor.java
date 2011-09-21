@@ -3,26 +3,25 @@ import java.lang.String;
 
 public class BarcodeProcessor implements IBarcodeProcessor{
 	private IScreen mScreen;
-	private IPriceList mPricelist;
+	private ICatalogue mPricelist;
 
-	public BarcodeProcessor(IScreen screen, IPriceList priceList){
+	public BarcodeProcessor(IScreen screen, ICatalogue catalogue){
 		mScreen = screen;
-		mPricelist = priceList;
+		mPricelist = catalogue;
 	}
 
-	public void onBarcode(String code){
-		if(code.length() == 0){
-			mScreen.showText("Scan error: empty barcode");
+	public void onBarcode(String barcode){
+		if(barcode == null || barcode.length() == 0){
+			mScreen.setEmptyBarcodeErrorMessage();
 			return;
 		}
 
-		Long price = mPricelist.getPrice(code);
+		Long price = mPricelist.getPrice(barcode);
 		if (price != null){
-			String currency = mPricelist.getCurrency(code);
-			mScreen.showText(String.format("%s %s.%s", currency, price / 100, price % 100));
+			mScreen.setPrice(price);
 		}
 		else{
-			mScreen.showText(String.format("No productfound: %s", code));
+			mScreen.setBarcodeNotFoundErrorMessage(barcode);
 		}
 	}
 }

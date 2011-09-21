@@ -3,11 +3,11 @@ import junit.framework.Assert;
 public class BarcodeProcessorTest extends junit.framework.TestCase {
 	IBarcodeProcessor mProcessor;
 	TestScreen mScreen;
-	TestPriceList mPricelist;
+	ImMemoryCatalogue mPricelist;
 
 	public void setUp(){
 		mScreen = new TestScreen();
-		mPricelist = new TestPriceList();
+		mPricelist = new ImMemoryCatalogue();
 		mProcessor = new BarcodeProcessor(mScreen, mPricelist);
 	}
 

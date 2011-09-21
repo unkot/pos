@@ -1,5 +1,7 @@
 import java.lang.String;
 
 public interface IScreen {
-	void showText(String text);
+	void setPrice(Long price);
+	void setEmptyBarcodeErrorMessage();
+	void setBarcodeNotFoundErrorMessage(String barcode);
 }
